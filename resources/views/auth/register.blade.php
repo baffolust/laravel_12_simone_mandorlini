@@ -1,8 +1,5 @@
 <x-layout title="Join the community">
 
-
-
-    <div class="container overlap-header">
         <div class="row justify-content-center">
             <div class="col-12 col-md-6">
 
@@ -32,6 +29,5 @@
                 </form>
             </div>
         </div>
-    </div>
 
 </x-layout>

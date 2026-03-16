@@ -7,11 +7,17 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="{{route('home')}}">Home</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('tour.index')}}">All tours</a>
+                </li>
                 @auth
-                    
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('tour.create')}}">Crea Tour</a>
+                </li>    
+
                 <li class="nav-item">
                     <form action="{{route('logout')}}" method="POST">
                         @csrf

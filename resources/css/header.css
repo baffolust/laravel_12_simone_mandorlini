@@ -14,8 +14,18 @@
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
-.top-messages{
-    margin-top: 80px;
+.error-top-messages{
+    position: absolute;
+    width: 50%;
+    top: 60px;
     background-color: rgba(239, 157, 157, 0.663);
+    backdrop-filter: blur(5px);
+}
+
+.top-messages{
+    position: absolute;
+    width: 50%;
+    top: 60px;
+    background-color: rgba(201, 239, 157, 0.663);
     backdrop-filter: blur(5px);
 }

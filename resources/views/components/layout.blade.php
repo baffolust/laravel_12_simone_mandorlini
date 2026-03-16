@@ -12,8 +12,10 @@
 
 <body>
     <x-navbar />
-    <x-masthead title="{{$title}}" />
-    {{ $slot }}
+    <x-masthead title="{{ $title }}" />
+    <div class="container overlap-header">
+        {{ $slot }}
+    </div>
 </body>
 
 </html>
