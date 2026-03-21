@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TourRequest;
 use App\Models\Tour;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 
 class TourController extends Controller
@@ -35,9 +36,9 @@ class TourController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'country' => $request->country
-            ]);
+        ]);
 
-        if($request->img){
+        if ($request->img) {
             $tour->img = $request->file('img')->store('img');
             $tour->save();
         }
@@ -58,7 +59,7 @@ class TourController extends Controller
      */
     public function edit(Tour $tour)
     {
-        //
+        return view('tour.edit', compact('tour'));
     }
 
     /**
@@ -66,7 +67,19 @@ class TourController extends Controller
      */
     public function update(Request $request, Tour $tour)
     {
-        //
+        if ($request->file('img')) {
+            Storage::disk('public')->delete($tour->img);
+            $img = $request->file('img')->store('img');
+        }
+
+        $tour->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'country' => $request->country,
+            'img' => $img
+        ]);
+
+        return redirect()->back()->with('message', 'Tour Modificato');
     }
 
     /**
@@ -74,6 +87,12 @@ class TourController extends Controller
      */
     public function destroy(Tour $tour)
     {
-        //
+        if ($tour->img !== 'img/road-trip-default.png') {
+            Storage::disk('public')->delete($tour->img);
+        } // cancella l'immagine solo se non è quella di default
+        $tour->delete();
+
+        $tours = Tour::all();
+        return view('tour.index', compact('tours'))->with('message', 'Tour Eliminato');
     }
 }
