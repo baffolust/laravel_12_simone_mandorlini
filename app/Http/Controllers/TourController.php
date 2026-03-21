@@ -63,7 +63,8 @@ class TourController extends Controller
      */
     public function edit(Tour $tour)
     {
-        return view('tour.edit', compact('tour'));
+        $tags = Tag::all();
+        return view('tour.edit', compact('tour', 'tags'));
     }
 
     /**
@@ -71,19 +72,21 @@ class TourController extends Controller
      */
     public function update(Request $request, Tour $tour)
     {
-        if ($request->file('img')) {
-            Storage::disk('public')->delete($tour->img);
-            $img = $request->file('img')->store('img');
-        }
 
         $tour->update([
             'name' => $request->name,
             'description' => $request->description,
             'country' => $request->country,
-            'img' => $img
         ]);
 
-        return redirect()->back()->with('message', 'Tour Modificato');
+        if ($request->file('img')) {
+            Storage::disk('public')->delete($tour->img);
+            $tour->img = $request->file('img')->store('img');
+        }
+        $tour->tags()->sync($request->tags);
+
+        $tours = Tour::all();
+        return redirect('tour.index', compact('tours'))->with('message', 'Tour Modificato');
     }
 
     /**
@@ -91,6 +94,8 @@ class TourController extends Controller
      */
     public function destroy(Tour $tour)
     {
+        $tour->tags()->detach();
+    
         if ($tour->img !== 'img/road-trip-default.png') {
             Storage::disk('public')->delete($tour->img);
         } // cancella l'immagine solo se non è quella di default
