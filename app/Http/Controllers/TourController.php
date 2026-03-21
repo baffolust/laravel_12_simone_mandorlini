@@ -6,6 +6,7 @@ use App\Http\Requests\TourRequest;
 use App\Models\Tag;
 use App\Models\Tour;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -36,8 +37,10 @@ class TourController extends Controller
     {
         $tour = Tour::create([
             'name' => $request->name,
+            'user_id' => Auth::user()->id,
             'description' => $request->description,
             'country' => $request->country
+            
         ]);
 
         if ($request->img) {
