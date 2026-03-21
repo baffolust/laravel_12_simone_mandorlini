@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\TourController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,4 +18,5 @@ Route::post('/tour/update/{tour}', [TourController::class, 'update'])->name('tou
 Route::delete('/tour/destroy/{tour}', [TourController::class, 'destroy'])->name('tour.destroy')->middleware('auth');
 
 // TagController
-Route::get('/toure/create', [TourController::class, 'create'])->name('tour.create')->middleware('auth');
+Route::get('/tag/create', [TagController::class, 'create'])->name('tag.create')->middleware('auth');
+Route::post('/tag/store', [TagController::class, 'store'])->name('tag.store')->middleware('auth');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TourRequest;
+use App\Models\Tag;
 use App\Models\Tour;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -24,7 +25,8 @@ class TourController extends Controller
      */
     public function create()
     {
-        return view('tour.create');
+        $tags = Tag::all();
+        return view('tour.create', compact('tags'));
     }
 
     /**
@@ -42,6 +44,8 @@ class TourController extends Controller
             $tour->img = $request->file('img')->store('img');
             $tour->save();
         }
+
+        $tour->tags()->attach($request->tags);
 
         return redirect()->back()->with('message', 'Hai inserito il tour');
     }

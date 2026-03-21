@@ -16,7 +16,11 @@
                 @auth
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('tour.create')}}">Crea Tour</a>
-                </li>    
+                </li>  
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('tag.create')}}">Crea Tag</a>
+                </li>  
 
                 <li class="nav-item">
                     <form action="{{route('logout')}}" method="POST">

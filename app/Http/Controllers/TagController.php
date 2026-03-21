@@ -28,7 +28,11 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Tag::create([
+            'name' => $request->name
+        ]);
+
+        return redirect()->back()->with('message', 'Tag Creato');
     }
 
     /**
