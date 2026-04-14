@@ -44,7 +44,7 @@ class TourController extends Controller
         ]);
 
         if ($request->img) {
-            $tour->img = $request->file('img')->store('img');
+            $tour->img = $request->file('img')->store('img', 'public');
             $tour->save();
         }
 
