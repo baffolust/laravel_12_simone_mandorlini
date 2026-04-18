@@ -89,7 +89,7 @@ class TourController extends Controller
         $tour->tags()->sync($request->tags);
 
         $tours = Tour::all();
-        return redirect('tour.index', compact('tours'))->with('message', 'Tour Modificato');
+        return view('tour.index', compact('tours'))->with('message', 'Tour Modificato');
     }
 
     /**

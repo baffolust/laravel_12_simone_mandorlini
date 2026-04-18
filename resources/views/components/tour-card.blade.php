@@ -11,15 +11,18 @@
             </div>
         @endif
         <a href="{{ route('tour.show', compact('tour')) }}" class="btn btn-warning">Vedi Tour</a>
-        @if (Auth::user()->id == $tour->user->id)
-            <div class="d-flex py-2">
-                <a class="mx-3" href="{{ route('tour.edit', compact('tour')) }}">Edit Tour</a>
-                <form class="mx-3" action="{{ route('tour.destroy', compact('tour')) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="nav-link text-primary text-decoration-underline">Delete Tour</button>
-                </form>
-            </div>
-        @endif
+        @auth
+
+            @if (Auth::user()->id == $tour->user->id)
+                <div class="d-flex py-2">
+                    <a class="mx-3" href="{{ route('tour.edit', compact('tour')) }}">Edit Tour</a>
+                    <form class="mx-3" action="{{ route('tour.destroy', compact('tour')) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="nav-link text-primary text-decoration-underline">Delete Tour</button>
+                    </form>
+                </div>
+            @endif
+        @endauth
     </div>
 </div>
