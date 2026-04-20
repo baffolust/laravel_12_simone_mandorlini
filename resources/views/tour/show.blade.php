@@ -9,8 +9,12 @@
             <h4>Descrizione del viaggio </h4>
             <p>{{ $tour->description }}</p>
             <div class="my-1">
-                <span class="badge rounded-pill text-bg-primary mb-1">Tag</span>
+                @foreach ($tour->tags as $tag)
+                    <span class="badge rounded-pill text-bg-primary mb-1">#{{ $tag->name }}</span>
+                @endforeach
             </div>
+            @auth
+            
             @if (Auth::user()->id == $tour->user->id)
                 <div class="d-flex">
                     <a class="mx-3" href="{{ route('tour.edit', compact('tour')) }}">Edit Tour</a>
@@ -22,6 +26,7 @@
                     </form>
                 </div>
             @endif
+            @endauth
         </div>
     </div>
 </x-layout>

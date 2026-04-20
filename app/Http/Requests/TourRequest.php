@@ -36,7 +36,7 @@ class TourRequest extends FormRequest
             'name.required' => 'Il nome del tour è obbligatorio',
             'name.min' => 'Il nome deve essere lungo minimo 5 caratteri',
             'description.required' => 'La descrizione del tour è obbligatoria',
-            'description.min' => 'La descrizione del tour deve essere lunga almeno 5 caratteri',
+            'description.min' => 'La descrizione del tour deve essere lunga almeno 100 caratteri',
             'description.max' => 'La descrizione del tour può essere lunga al massimo 500 caratteri',
             'country.required' => 'La nazione del tour è obbligatoria',
             'country.max' => 'La nazione del tour può essere lunga al massimo 500 caratteri',
